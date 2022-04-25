@@ -1,0 +1,79 @@
+<!----------------------------------------------------+
+ |        HANGMAN: A JavaScript Implementation        |
+ | CIS 5620: Authoring Websites                       |
+ +---------------------------------------------------->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="css/hangman.css" rel="stylesheet">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Hangman</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="my-3 pt-5 text-center">
+            <canvas id="hangman" width="180" height="250" ></canvas>
+        </div>
+        <div id="word" class="mb-3 text-center">
+
+        </div>
+        <!-- Clickable letters board -->
+        <div id="letters" class="btn-toolbar my-3 justify-content-center">
+            <div class="btn-group btn-group-lg">
+                <button class="btn btn-outline-dark letter" data-letter="a">A</a>
+                <button class="btn btn-outline-dark letter" data-letter="b">B</button>
+                <button class="btn btn-outline-dark letter" data-letter="c">C</button>
+                <button class="btn btn-outline-dark letter" data-letter="d">D</button>
+                <button class="btn btn-outline-dark letter" data-letter="e">E</button>
+                <button class="btn btn-outline-dark letter" data-letter="f">F</button>
+                <button class="btn btn-outline-dark letter" data-letter="g">G</button>
+                <button class="btn btn-outline-dark letter" data-letter="h">H</button>
+                <button class="btn btn-outline-dark letter" data-letter="i">I</button>
+                <button class="btn btn-outline-dark letter" data-letter="j">J</button>
+                <button class="btn btn-outline-dark letter" data-letter="k">K</button>
+                <button class="btn btn-outline-dark letter" data-letter="l">L</button>
+                <button class="btn btn-outline-dark letter" data-letter="m">M</button>
+                <button class="btn btn-outline-dark letter" data-letter="n">N</button>
+                <button class="btn btn-outline-dark letter" data-letter="o">O</button>
+                <button class="btn btn-outline-dark letter" data-letter="p">P</button>
+                <button class="btn btn-outline-dark letter" data-letter="q">Q</button>
+                <button class="btn btn-outline-dark letter" data-letter="r">R</button>
+                <button class="btn btn-outline-dark letter" data-letter="s">S</button>
+                <button class="btn btn-outline-dark letter" data-letter="t">T</button>
+                <button class="btn btn-outline-dark letter" data-letter="u">U</button>
+                <button class="btn btn-outline-dark letter" data-letter="v">V</button>
+                <button class="btn btn-outline-dark letter" data-letter="w">W</button>
+                <button class="btn btn-outline-dark letter" data-letter="x">X</button>
+                <button class="btn btn-outline-dark letter" data-letter="y">Y</button>
+                <button class="btn btn-outline-dark letter" data-letter="z">Z</button>
+            </div>
+        </div>
+
+        <!-- End-of-game messaging section -->
+        <div class="text-center fs-1">
+            <span id="game-over-msg" class="hide">GAME OVER <i class="bi bi-emoji-frown"></i></span>            
+            <span id="win-msg" class="hide">CONGRATULATIONS <i class="bi bi-emoji-laughing"></i></span>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="js/hangman.js"></script>
+</body>
+
+</html>
