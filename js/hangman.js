@@ -146,6 +146,9 @@
   
   @returns No value.
   */
+
+  let totalCorrect = 0;
+
   function chooseLetter(event) {
     // Get a reference to the DOM element that registered the event
     const letterBtn = event.currentTarget;
@@ -155,9 +158,31 @@
 
     /* YOU MAY CHANGE THE CODE IN THIS FUNCTION */
 
+    
     // Draw the corresponding hangman part and
     // increment the GAME.step variable by one
-    drawHangman(HANGMAN_STEPS[GAME.step++]);
+
+
+    //If value returned is -1, it means the letter does not exist
+    //as a result, the step is incremented and drawHangman is called
+
+  
+    const chosenLetterIndex = WORD.toUpperCase().indexOf(letterBtn.innerHTML.toUpperCase());
+
+    if(chosenLetterIndex == "-1"){
+      drawHangman(HANGMAN_STEPS[GAME.step++]);
+    }else{
+      document.querySelector("#word").children[chosenLetterIndex].innerHTML = WORD.slice(chosenLetterIndex, chosenLetterIndex + 1);  
+      //increment each time a correct answer is made
+      //will compare totalCorrect with length of word that needs to be guess to determine the WIN
+      totalCorrect++
+      
+    }
+
+    // check if number of correct choices were made
+    if(totalCorrect === WORD.length){
+      document.querySelector("#win-msg").classList.remove("hide");
+    }
 
     // Check if the hangman is completed to display the end-game message
     if (undefined === HANGMAN_STEPS[GAME.step]) {
@@ -183,10 +208,11 @@
   }
   document.querySelector('#word').innerHTML = wordHTML;
 
+
   // Add the chooseLetter function as an event handler for each
   // letter on the board
   for (let letterBtn of document.querySelectorAll(".letter")) {
-    letterBtn.addEventListener('click', chooseLetter)
+    letterBtn.addEventListener('click', chooseLetter);
   }
 
 })();
