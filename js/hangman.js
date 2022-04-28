@@ -40,7 +40,7 @@
   const SPACE = '&nbsp;&nbsp;&nbsp;';
 
   // Word to guess
-  const WORD = "tell"; 
+  const WORD = "committee"; 
 
   // State of the game
   const GAME = {
@@ -162,29 +162,49 @@
     /* YOU MAY CHANGE THE CODE IN THIS FUNCTION */
 
     
-    // Draw the corresponding hangman part and
-    // increment the GAME.step variable by one
-
+    
+    /*
+      A regular expression object is created to check how many instances of the chosen
+      letter are present in the WORD. The global and case insentive flags are use
+      to ignore case and register all instances.
+    */
     let matchPattern = new RegExp(letterBtn.innerHTML,"gi");
+    //returns array of total instances
     let totalInstances = WORD.match(matchPattern);
 
+    //if the chosen letter is not in the word, match() will return null
+    //if null is returned, the user guessed incorrectly
     if(totalInstances === null){
-      
+      // Draw the corresponding hangman part and
+      // increment the GAME.step variable by one
+      // when guessed incorrectly
       drawHangman(HANGMAN_STEPS[GAME.step++]);
     
     }else{
     
+      //the start position is used to identify the next starting point of the indexOf() 
+      //array method
       let startPoint = 0;
 
+      //if for loop is used to create the letter for each instance of chosen letter that is
+      //present in the word. For example, TELL has two LL. As a result, the application needs to
+      //add these two instances on the interface
       for(let i = 0; i < totalInstances.length; i++){
 
+        //the index of the letter in the Word is returned
         let index = WORD.toLowerCase().indexOf(letterBtn.innerHTML.toLowerCase(),startPoint);
         
-        console.log(index);
-        
+        //due to the child nodes having the same index as the letter in the word
+        //we can use the index to return the correct child node and replace the placeholder
+        //with the correctly guess letter(s)
         document.querySelector("#word").children[index].innerHTML = letterBtn.innerHTML;
         
+        //the starPoint is updated to the recent index plus 1. On the next iteration,
+        //indexOf() will continue searching for another instance of the letter
+        //this piece is irrelevant if the letter is only present once in the Word
         startPoint = index + 1;
+
+        //each loop increments totalCorrect. Once all letters have been guessed the player wins
         totalCorrect++
       }
       
