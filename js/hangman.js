@@ -40,12 +40,15 @@
   const SPACE = '&nbsp;&nbsp;&nbsp;';
 
   // Word to guess
-  const WORD = "computer"; 
+  const WORD = "tell"; 
 
   // State of the game
   const GAME = {
     step: 0             // An integer used as an index of the HANGMAN_STEPS array
   };
+
+  //totalCorrect is used to keep track of how many correct answers were made
+  let totalCorrect = 0;
 
   // FUNCTIONS
 
@@ -147,7 +150,7 @@
   @returns No value.
   */
 
-  let totalCorrect = 0;
+  
 
   function chooseLetter(event) {
     // Get a reference to the DOM element that registered the event
@@ -162,24 +165,37 @@
     // Draw the corresponding hangman part and
     // increment the GAME.step variable by one
 
+    let matchPattern = new RegExp(letterBtn.innerHTML,"gi");
+    let totalInstances = WORD.match(matchPattern);
 
-    //If value returned is -1, it means the letter does not exist
-    //as a result, the step is incremented and drawHangman is called
-
-  
-    const chosenLetterIndex = WORD.toUpperCase().indexOf(letterBtn.innerHTML.toUpperCase());
-
-    if(chosenLetterIndex == "-1"){
+    if(totalInstances === null){
+      
       drawHangman(HANGMAN_STEPS[GAME.step++]);
+    
     }else{
-      document.querySelector("#word").children[chosenLetterIndex].innerHTML = WORD.slice(chosenLetterIndex, chosenLetterIndex + 1);  
-      //increment each time a correct answer is made
-      //will compare totalCorrect with length of word that needs to be guess to determine the WIN
-      totalCorrect++
+    
+      let startPoint = 0;
+
+      for(let i = 0; i < totalInstances.length; i++){
+
+        let index = WORD.toLowerCase().indexOf(letterBtn.innerHTML.toLowerCase(),startPoint);
+        
+        console.log(index);
+        
+        document.querySelector("#word").children[index].innerHTML = letterBtn.innerHTML;
+        
+        startPoint = index + 1;
+        totalCorrect++
+      }
       
     }
 
+    //disabled the button; no longer needs to be selected
+    //prevents user from reselecting the same button
+    letterBtn.setAttribute("disabled", "true");
+
     // check if number of correct choices were made
+    // if yes, the user wins
     if(totalCorrect === WORD.length){
       document.querySelector("#win-msg").classList.remove("hide");
     }

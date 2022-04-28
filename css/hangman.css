@@ -1,4 +1,5 @@
-.letter-chosen {
+/*added background color to disabled button*/
+.letter-chosen:disabled {
     background-color: black;
     color: white;
 }
